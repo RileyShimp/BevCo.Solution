@@ -1,0 +1,36 @@
+@{
+  Layout = "_Layout";
+}
+
+@using BevCo.Models
+
+@if (Model.Count == 0)
+{
+  <h3>There are no categories added!</h3>
+}
+
+@foreach (Category category in Model) 
+{
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title">
+            <a href="categories/details/@category.CategoryId">
+              <h3>@category.Name</h3>
+            </a>
+          </div>
+          <p class="card-text">
+            @if (@category.IsAlcoholic) 
+            {
+              @:("Alcoholic")
+            } else 
+            {
+              @:("Non alcoholic")
+            }
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+}

@@ -45,9 +45,10 @@
       </div>
     </div>
   </nav>
-      <div class="container mt-2">
-        <div class="h-100 p-5 bg-info border rounded-3 text-center">
-          <h1>@ViewBag.PageTitle</h1>
+      <div class="container mt-2 p-2">
+        <div class="h-100 p-5 bg-success border rounded-3 text-center shadow-sm">
+          <h1 class="text-light">@ViewBag.PageTitle</h1>
+          <h3 class="text-light">@ViewBag.PageSubTitle</h3>
         </div>
           @RenderBody()
       </div>

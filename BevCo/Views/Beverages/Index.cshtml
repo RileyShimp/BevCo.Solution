@@ -1,0 +1,55 @@
+@{
+  Layout = "_Layout";
+}
+
+@using BevCo.Models
+
+@if (Model.Count == 0)
+{
+  <h3>There are no beverages added!</h3>
+}
+
+
+@* @foreach (Beverage beverage in Model)  *@
+@for (int x = 0; x < @Model.Count; x++)
+{
+  if (x == 0 || (x % 3 == 0))
+  {
+    @:<div class="row mt-3">
+  }
+    <div class="col-4">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <div class="card-title">
+            <a href="beverages/details/@Model[x].BeverageId" class="text-dark">
+              <h3>@Model[x].BeverageName, 
+              @foreach(var join in @ViewBag.CategoriesBeverages)
+                {
+                  if (join.BeverageId == @Model[x].BeverageId) {
+                    @join.Category.Name
+                  }
+                }
+              </h3>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            <ul>
+              <li>Description: @Model[x].Description</li>
+              <li>Country of Origin: @Model[x].CountryOfOrigin</li>
+              <li>Our Price: @Model[x].Cost</li>
+              <li>Stock Count: @Model[x].StockCount</li>
+              <li>Bottle Size: @Model[x].IndividualBottleSize</li>
+              <li>Bottle Count: @Model[x].BottleCount</li>
+              <li>Calorie Count: @Model[x].CalorieCount</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+    if ((x+1) % 3 == 0)
+    {
+      @:</div>
+    }
+}

@@ -1,0 +1,44 @@
+@{
+  Layout = "_Layout";
+}
+
+
+@model BevCo.Models.Beverage
+
+
+<div class="p-5 bg-light">
+<div class="px-5 mt-5">
+@using (Html.BeginForm())
+  {
+    @Html.LabelFor(m => m.BeverageName)
+    @Html.TextBoxFor(m => m.BeverageName, new {@class="form-control"})
+
+    @Html.LabelFor(m => m.Description)
+    @Html.TextBoxFor(m => m.Description, new {@class="form-control"})
+
+    @Html.LabelFor(m => m.CountryOfOrigin)
+    @Html.TextBoxFor(m => m.CountryOfOrigin, new {@class="form-control"})
+
+    @Html.LabelFor(m => m.Cost)
+    @Html.TextBoxFor(m => m.Cost, new {@class="form-control", @placeholder="$", type="number", min="1"})
+
+    @Html.LabelFor(m => m.StockCount)
+    @Html.TextBoxFor(m => m.StockCount, new {@class="form-control", type="number", min="1"})
+
+    @Html.LabelFor(m => m.IndividualBottleSize)
+    @Html.TextBoxFor(m => m.IndividualBottleSize, new {@class="form-control", @placeholder="ML", type="number", min="1"})
+
+    @Html.LabelFor(m => m.BottleCount)
+    @Html.TextBoxFor(m => m.BottleCount, new {@class="form-control", type="number", min="1"})
+
+    @Html.LabelFor(m => m.CalorieCount)
+    @Html.TextBoxFor(m => m.CalorieCount, new {@class="form-control", type="number", min="1"})
+
+    @Html.Label("Select a category")
+    @Html.DropDownList("CategoryId", (IEnumerable<SelectListItem>)ViewBag.CategoryId, new { @required = "required", @class="form-control"})
+    
+
+    <input type="submit" value="Add a new beverage" class="btn btn-dark mt-3">
+  }
+  </div>
+</div>

@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+
+@model BevCo.Models.Category
+
+<h2>Edit</h2>
+
+<h4>Edit this Category: @Html.DisplayFor(model => model.Name)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.CategoryId)
+
+    @Html.LabelFor(model => model.Name)
+    @Html.EditorFor(model => model.Name)
+
+    @Html.LabelFor(model => model.IsAlcoholic, "Is this category alcholic?")
+    @Html.DropDownListFor(model => model.IsAlcoholic, new List<SelectListItem>
+    {
+      new SelectListItem { Text = "Yes", Value = "true"},
+      new SelectListItem { Text = "No", Value = "false"}
+    }, new { @required = "required", @class="form-control"})
+
+    <input type="submit" value="Save" />
+}
+<p>@Html.ActionLink("Back to list", "Index")<Category

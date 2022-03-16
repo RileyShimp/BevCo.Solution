@@ -15,31 +15,58 @@ namespace BevCo.Controllers
     {
       _db = db;
     }
-//     public ActionResult Index()
-    // {
-    //   List<Course> model = _db.Courses.ToList();
-    //   return View(model);
-    // }
-    // public ActionResult Create()
-    // {
-    //   ViewBag.DepartmentId = new SelectList(_db.Departments, "DepartmentId", "DepartmentCourseAbv");
-    //   return View();
-    // }
+    public ActionResult Index()
+    {
+      ViewBag.PageTitle = "Categories";
+      List<Category> model = _db.Categories.ToList();
+      return View(model);
+    }
+    public ActionResult Create()
+    {
+      ViewBag.PageTitle = "Create a category";
+      return View();
+    }
 
-    // [HttpPost]
-    // public ActionResult Create(Course course)
-    // {
-    //   _db.Courses.Add(course);
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Index", "Courses"); 
-    // }
+    [HttpPost]
+    public ActionResult Create(Category category)
+    {
+      _db.Categories.Add(category);
+      _db.SaveChanges();
+      return RedirectToAction("Index", "Categories"); 
+    }
 
-    // public ActionResult Details(int id)
-    // {
-    //   Client thisClient = _db.Clients.FirstOrDefault(c => c.ClientId == id);
-    //   return View(thisClient);
-    // }
+    [HttpPost]
+    public ActionResult Edit(Category category)
+    {
+      _db.Entry(category).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index", "Categories");
+    }
 
+    public ActionResult Edit(int id)
+    {
+      var thisCategory = _db.Categories.FirstOrDefault(category => category.CategoryId == id);
+      return View(thisCategory);
+    }
+
+    public ActionResult Details(int id)
+    {
+      Category thisCategory = _db.Categories
+                      .Include(i => i.JoinEntities)
+                      .ThenInclude(join => join.Beverage)
+                      .FirstOrDefault(c => c.CategoryId == id);
+      ViewBag.PageTitle = thisCategory.Name;  
+      return View(thisCategory);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult Delete (int id)
+    {
+      var joinEntry = _db.Categories.FirstOrDefault(entry => entry.CategoryId == id);
+      _db.Categories.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
     
   }
 }

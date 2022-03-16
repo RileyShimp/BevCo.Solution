@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+
+
+@model BevCo.Models.Category
+
+
+<div class="p-5 bg-light">
+<div class="px-5 mt-5">
+@using (Html.BeginForm())
+  {
+    @Html.LabelFor(m => m.Name)
+    @Html.TextBoxFor(m => m.Name, new {@class="form-control"})
+
+    @Html.Label("IsAlcoholic", "Is this category alcholic?")
+    @Html.DropDownList("IsAlcoholic", new List<SelectListItem>
+    {
+      new SelectListItem { Text = "Yes", Value = "true"},
+      new SelectListItem { Text = "No", Value = "false"}
+    }, new { @required = "required", @class="form-control"})
+
+    <input type="submit" value="Add a new category" class="btn btn-dark mt-3">
+  }
+  </div>
+</div>

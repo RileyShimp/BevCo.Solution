@@ -1,0 +1,52 @@
+@{
+  Layout = "_Layout";
+}
+
+@using BevCo.Models
+@model BevCo.Models.Category
+<ul>
+  @foreach(var join in @Model.JoinEntities)
+  {
+    <li>@join.Beverage.BeverageName</li>
+  }
+  </ul>
+<h4>
+  <li>Contains Alcohol: @Model.IsAlcoholic</li>
+
+<p>@Html.ActionLink("Edit Category", "Edit", new { id = Model.CategoryId })</p>
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#deleteModal">
+  Delete
+</button>
+<p>@Html.ActionLink("Back to list", "Index")</p>
+</h4>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        @using (Html.BeginForm("Delete", "Categories"))
+        {
+          <input type="hidden" value="@Model.CategoryId" name="id">
+          <input type="submit" value="Yes, Delete" class="btn btn-dark" />
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

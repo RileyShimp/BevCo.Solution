@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+
+@using BevCo.Models
+@model BevCo.Models.Beverage
+<ul>
+  @foreach(var join in @Model.JoinEntities)
+  {
+    <li>@join.Category.Name</li>
+  }
+  </ul>
+<h4>
+  <li>Description: @Model.Description</li>
+  <li>Country of Origin: @Model.CountryOfOrigin</li>
+  <li>Our Price: @Model.Cost</li>
+  <li>Stock Count: @Model.StockCount</li>
+  <li>Bottle Size: @Model.IndividualBottleSize</li>
+  <li>Bottle Count: @Model.BottleCount</li>
+  <li>Calorie Count: @Model.CalorieCount</li>
+
+<p>@Html.ActionLink("Edit Beverage", "Edit", new { id = Model.BeverageId })</p>
+<p>@Html.ActionLink("Delete Beverage", "Delete", new { id = Model.BeverageId })</p>
+<p>@Html.ActionLink("Back to list", "Index")</p>
+</h4>
